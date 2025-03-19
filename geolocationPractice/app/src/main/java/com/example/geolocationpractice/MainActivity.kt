@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var txtLocation: TextView
 
-    // Manejador para solicitar permisos de ubicación
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         txtLocation = findViewById(R.id.txtLocation)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        // Verificamos permisos y obtenemos la ubicación
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -53,12 +51,11 @@ class MainActivity : AppCompatActivity() {
                 if (location != null) {
                     updateLocationUI(location)
                 } else {
-                    // Configuramos un request con parámetros un poco más amplios
                     val locationRequest = LocationRequest.create().apply {
-                        interval = 1000         // 1 segundo de intervalo
-                        fastestInterval = 500   // 0.5 segundos de intervalo mínimo
+                        interval = 1000
+                        fastestInterval = 500
                         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-                        numUpdates = 1          // Solo necesitamos una actualización
+                        numUpdates = 1
                     }
                     fusedLocationClient.requestLocationUpdates(
                         locationRequest,
@@ -70,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                                 } else {
                                     txtLocation.text = "Ubicación no disponible"
                                 }
-                                // Detenemos las actualizaciones una vez recibida la ubicación
+
                                 fusedLocationClient.removeLocationUpdates(this)
                             }
                         },
