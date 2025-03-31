@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.geolocationpractice.app-mergeDebugResources-34:/values-zh-rHK/values-zh-rHK.xml",
+            "outputFile": "com.example.geolocationpractice.app-mergeDebugResources-35:/values-zh-rHK/values-zh-rHK.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andercastro\\.gradle\\caches\\8.10.2\\transforms\\befc58eaeeb5944c4de991cf9f9b4118\\transformed\\play-services-basement-18.4.0\\res\\values-zh-rHK\\values.xml",

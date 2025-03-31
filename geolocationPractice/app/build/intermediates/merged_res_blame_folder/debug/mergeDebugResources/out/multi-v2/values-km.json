@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.geolocationpractice.app-mergeDebugResources-34:/values-km/values-km.xml",
+            "outputFile": "com.example.geolocationpractice.app-mergeDebugResources-35:/values-km/values-km.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andercastro\\.gradle\\caches\\8.10.2\\transforms\\71b51da75efa9dfe1c788558b6c86072\\transformed\\play-services-base-18.5.0\\res\\values-km\\values.xml",

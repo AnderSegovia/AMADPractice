@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.geolocationpractice.app-mergeDebugResources-34:/values-hu/values-hu.xml",
+            "outputFile": "com.example.geolocationpractice.app-mergeDebugResources-35:/values-hu/values-hu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\andercastro\\.gradle\\caches\\8.10.2\\transforms\\a9fd3e4c4eb1b4573e11bed6e1a4876d\\transformed\\core-1.15.0\\res\\values-hu\\values-hu.xml",

@@ -13,4 +13,10 @@
         android:textSize="18sp"
         android:translationX="100dp"
         android:translationY="300dp" />
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
