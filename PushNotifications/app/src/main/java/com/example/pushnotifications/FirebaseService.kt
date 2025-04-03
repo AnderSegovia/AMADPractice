@@ -15,49 +15,44 @@ class FirebaseService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.d("Firebase", "Nuevo token: $token")
+        Log.d("FCM", "Nuevo Token: $token")
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
-        // Verificar si el mensaje tiene datos
+        Log.d("FCM", "Mensaje recibido: ${remoteMessage.notification?.body}")
+
         remoteMessage.notification?.let {
             mostrarNotificacion(it.title ?: "Notificación", it.body ?: "")
         }
     }
 
-    private fun mostrarNotificacion(title: String, message: String) {
-        val channelId = "fcm_default_channel"
-        val notificationId = System.currentTimeMillis().toInt()
+    private fun mostrarNotificacion(titulo: String, mensaje: String) {
+        val channelId = "canal_notificacion"
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)  // Usa un icono válido
+            .setContentTitle(titulo)
+            .setContentText(mensaje)
+            .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Crear el canal de notificación
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                channelId,
-                "Canal de Notificaciones",
-                NotificationManager.IMPORTANCE_HIGH
+                channelId, "Canal de Notificaciones", NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Abrir la app al hacer clic en la notificación
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-        // Construcción de la notificación
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-            .build()
-
-        // Mostrar la notificación
-        notificationManager.notify(notificationId, notification)
+        notificationManager.notify(0, notificationBuilder.build())
     }
 }
